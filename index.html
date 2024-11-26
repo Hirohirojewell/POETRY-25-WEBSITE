@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marry Me Please</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom, #fbc2eb, #a6c1ee);
+      font-family: 'Palatino Linotype', serif;
+      color: #5a2d82;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .image-container {
+      position: relative;
+      text-align: center;
+      cursor: pointer;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    img {
+      width: 220px;
+      border-radius: 15px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.1);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .poetry {
+      max-width: 350px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid #dab6fc;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-size: 18px;
+      color: #4a148c;
+      line-height: 1.8;
+      margin-top: 20px;
+      animation: fadeInPoem 1.5s ease-out;
+      overflow: hidden;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .poetry p {
+      margin: 0;
+      font-style: italic;
+      animation: typewriter 6s steps(44) 0.5s forwards;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #4a148c;
+    }
+
+    button {
+      background: #7b5dc3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background: #5a2d82;
+      transform: scale(1.05);
+    }
+
+    .music-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #7b5dc3;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 50px;
+      transition: background 0.3s ease;
+    }
+
+    .music-toggle:hover {
+      background: #5a2d82;
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 100, 150, 0.8);
+      position: absolute;
+      bottom: -20px;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0.8;
+      transform: translateX(0);
+      border-radius: 50%;
+    }
+
+    .heart:nth-child(odd) {
+      background: rgba(255, 200, 200, 0.8);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInPoem {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes typewriter {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(30px) translateY(-200px);
+      }
+      100% {
+        transform: translateX(-20px) translateY(-400px);
+        opacity: 0;
+      }
+    }
+
+    .floating-text {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      color: #f6a9d1;
+      font-weight: bold;
+      animation: fadeInText 1.5s ease-in-out;
+    }
+
+    .smaller-images {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      display: none; /* Initially hidden */
+    }
+
+    .smaller-images img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+    }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" aria-hidden="true"></div>
+  <div class="image-container">
+    <!-- Step 1: Closed Ring Box -->
+    <img src="picture1.png" id="box" alt="Closed Ring Box" onclick="showOpenBox()" title="Unlock the magic of love">
+    
+    <!-- Step 2: Open Ring Box -->
+    <img src="picture2.png" id="openBox" class="hidden" alt="Open Ring Box" onclick="showPoetry()" title="A treasure awaits you">
+    <div id="floatingText" class="hidden floating-text">Will you marry me ??</div>
+    
+    <!-- Four Smaller Images under the main image -->
+    <div id="smallerImages" class="smaller-images">
+      <img src="small1.gif" alt="Small Image 1">
+      <img src="small2.gif" alt="Small Image 2">
+      <img src="small3.gif" alt="Small Image 3">
+      <img src="small4.gif" alt="Small Image 4">
+    </div>
+
+    <!-- Step 3: Poetry Message -->
+    <div id="poetryMessage" class="hidden poetry">
+      <p>
+        In your eyes, I see our future unfold, <br>
+        A story of love, more precious than gold. <br>
+        In every moment, in each tender glance, <br>
+        I find my heart in a timeless dance. <br><br>
+
+        Together, we'll build a life so bright, <br>
+        With laughter, joy, and love's pure light. <br>
+        Hand in hand, we'll walk through time, <br>
+        Forever yours, and forever mine. <br><br>
+
+        And one day soon, I’ll make you mine, <br>
+        In a vow, with this ring, a love so divine. <br>
+        Through all the years, our hearts will beat, <br>
+        In every challenge, love's rhythm sweet. <br><br>
+
+        With you, my love, I see the skies, <br>
+        A future of love that never dies. <br>
+        In this life, and the next, I'll be true, <br>
+        Forever and always, I'll marry you. <br>
+      </p>
+      <button onclick="restart()">Replay</button>
+    </div>
+  </div>
+
+  <audio id="bg-music" loop>
+    <source src="romantic-melody.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button id="musicToggle" class="music-toggle" aria-label="Toggle Music">♫</button>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('musicToggle');
+    const heartsContainer = document.querySelector('.hearts');
+    let isMusicPlaying = false;
+
+    // Create floating hearts dynamically
+    function createHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        heartsContainer.appendChild(heart);
+      }
+    }
+
+    // Play or Pause the Music
+    musicToggle.addEventListener('click', () => {
+      if (isMusicPlaying) {
+        music.pause();
+        musicToggle.textContent = '♫';
+        isMusicPlaying = false;
+      } else {
+        music.play();
+        musicToggle.textContent = '❚❚'; // Pause icon
+        isMusicPlaying = true;
+      }
+    });
+
+    // Show the open box and small images
+    function showOpenBox() {
+      if (!isMusicPlaying) {
+        music.play();
+        musicToggle.textContent = '❚❚';
+        isMusicPlaying = true;
+      }
+      document.getElementById('box').classList.add('hidden');
+      document.getElementById('openBox').classList.remove('hidden');
+      document.getElementById('floatingText').classList.remove('hidden');
+      document.getElementById('smallerImages').style.display = 'flex'; // Show small images
+    }
+
+    // Show the poetry message and hide other elements
+    function showPoetry() {
+      document.getElementById('openBox').classList.add('hidden');
+      document.getElementById('floatingText').classList.add('hidden');
+      document.getElementById('smallerImages').style.display = 'none'; // Hide small images
+      document.getElementById('poetryMessage').classList.remove('hidden');
+    }
+
+    // Restart the process
+    function restart() {
+      document.getElementById('poetryMessage').classList.add('hidden');
+      document.getElementById('box').classList.remove('hidden');
+      document.getElementById('floatingText').classList.add('hidden');
+      document.getElementById('smallerImages').style.display = 'none'; // Hide small images
+    }
+
+    // Initialize hearts on page load
+    createHearts();
+  </script>
+</body>
+</html>
